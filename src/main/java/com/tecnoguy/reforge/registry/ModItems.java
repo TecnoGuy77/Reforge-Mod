@@ -11,12 +11,17 @@ import net.minecraft.util.Identifier;
 import java.util.function.Function;
 
 public class ModItems {
-    public static final Item HEART = registry("heart",Item::new,new Item.Settings().maxCount(16));
+    public static final Item HEART = register("heart",Item::new,new Item.Settings().maxCount(16));
 
-    private static Item registry(String itemID, Function<Item.Settings, Item> itemFactory, Item.Settings settings){
-        RegistryKey<Item> itemRegistryKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Reforge.MOD_ID,itemID));
-        Item item = itemFactory.apply(settings.registryKey(itemRegistryKey));
-        Registry.register(Registries.ITEM,itemID,item);
+    public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+        // Create the item key.
+        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Reforge.MOD_ID, name));
+
+        // Create the item instance.
+        Item item = itemFactory.apply(settings.registryKey(itemKey));
+
+        // Register the item.
+        Registry.register(Registries.ITEM, itemKey, item);
 
         return item;
     }
