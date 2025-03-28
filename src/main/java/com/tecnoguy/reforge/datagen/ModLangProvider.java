@@ -14,6 +14,6 @@ public class ModLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
-        translationBuilder.add("item.reforge.heart","Heart");
+        translationBuilder.add(ModItems.HEART,"Heart");
     }
 }
